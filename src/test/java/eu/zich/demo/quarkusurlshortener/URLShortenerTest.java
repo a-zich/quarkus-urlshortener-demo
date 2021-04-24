@@ -7,15 +7,17 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 
 @QuarkusTest
-public class ApiRessourceTest {
+public class URLShortenerTest {
 
+    /**
+     * There should be an index page at /
+     */
     @Test
-    public void testHelloEndpoint() {
+    public void testRootEndpoint() {
         given()
-          .when().get("/urls")
+          .when().get("/")
           .then()
-             .statusCode(200)
-             .body(is("Hello RESTEasy"));
+             .statusCode(200);
     }
 
 }
