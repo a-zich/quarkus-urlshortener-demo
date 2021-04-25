@@ -17,8 +17,8 @@ jobs:
           mvn package --batch-mode -Dquarkus.native.container-build=false \
                                             -Dquarkus.container-image.build=true \
                                             -Dquarkus.container-image.push=true \
-                                            -Dquarkus.jib.base-registry-username=${{ github.actor }} \
-                                            -Dquarkus.jib.base-registry-password=${{ secrets.GITHUB_TOKEN }} \
-                                            -Dquarkus.container-image.registry=docker.pkg.github.com \
-                                            -Dquarkus.container-image.group=${{ github.repository }}
+                                            -Dquarkus.container-image.username=${{ github.actor }} \
+                                            -Dquarkus.container-image.password=${{ secrets.GITHUB_TOKEN }} \
+                                            -Dquarkus.container-image.registry=ghcr.io \
+                                            -Dquarkus.container-image.group=${{ github.repository_owener }}
           
