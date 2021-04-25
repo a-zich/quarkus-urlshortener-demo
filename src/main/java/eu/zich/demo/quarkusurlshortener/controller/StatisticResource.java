@@ -35,8 +35,8 @@ public class StatisticResource {
 	@GET
 	@Path(Constants.ID_WITH6LETTERS_PATH)
 	@APIResponse(responseCode = "200", content = @Content(mediaType = MediaType.TEXT_PLAIN), description = "Number of times this shortUrl was called in the last 24h, 0 if not called or not configured")
-	public int getStats(@PathParam("id") String id) {
+	public String getStats(@PathParam("id") String id) {
 		log.infov("getting stats for {0}", id);
-		return statsservice.getStats(id);
+		return Integer.toString(statsservice.getStats(id));
 	}
 }

@@ -85,21 +85,11 @@ public class UrlResource {
 	@APIResponse(responseCode = "204", description = "when the shortUrl was configured successfully.")
 	@APIResponse(responseCode = "400", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = org.jboss.resteasy.api.validation.ViolationReport.class, required = true)),   description = "when the data was not valid")
 	@APIResponse(responseCode = "409", description = "when this shortUrl is already taken")
-	@APIResponse(responseCode = "417", description = "when the redirectUrl is not a valid absolute URI")
 	@APIResponse(responseCode = "503", description = "when no random free spot in the namespace was found. Please try again later.")
 	public Response postShortendUrl(@Valid ShortUrlEntity entity, @Context UriInfo uriInfo) {
 		log.infov("creating new ShortUrlEntity for {0}", entity.toString());
 
 		// no need to check whether entity is valid as Quarkus will do for us
-
-		// but we add a check for invalid characters to improve security
-		try {
-			URI uri = URI.create(entity.redirectUrl);
-			entity.redirectUrl = uri.toASCIIString();
-
-		} catch (IllegalArgumentException e) {
-			return Response.status(Status.EXPECTATION_FAILED.getStatusCode(), "the redirectUrl must be valid").build();
-		}
 
 		// we must distinguish between a shortUrl given or not
 
