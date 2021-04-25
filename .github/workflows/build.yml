@@ -24,5 +24,5 @@ jobs:
                                             -Dquarkus.jib.base-registry-username=${{ github.actor }} \
                                             -Dquarkus.jib.base-registry-password=${{ secrets.GITHUB_TOKEN }}
                                             -Dquarkus.container-image.registry=docker.pkg.github.com \
-                                            -Dquarkus.container-image.group={{ github.repository }}
+                                            -Dquarkus.container-image.group=a-zich/quarkus-urlshortener-demo
           
