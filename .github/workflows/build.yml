@@ -20,5 +20,5 @@ jobs:
                                             -Dquarkus.container-image.username=${{ github.actor }} \
                                             -Dquarkus.container-image.password=${{ secrets.GITHUB_TOKEN }} \
                                             -Dquarkus.container-image.registry=ghcr.io \
-                                            -Dquarkus.container-image.group=${{ github.repository_owener }}
+                                            -Dquarkus.container-image.group=${{ github.actor }}
           
