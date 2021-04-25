@@ -18,14 +18,14 @@ jobs:
           distribution: 'adopt'
       - name: Build with Maven
         run: |
-          mvn package --batch-mode -Dquarkus.native.container-build=false \
+          mvn package --batch-mode          -Dquarkus.native.container-build=false \
                                             -Dquarkus.container-image.build=true \
                                             -Dquarkus.container-image.push=true \
                                             -Dquarkus.container-image.username=${{ github.actor }} \
                                             -Dquarkus.container-image.password=${{ secrets.GITHUB_TOKEN }} \
                                             -Dquarkus.container-image.registry=ghcr.io \
                                             -Dquarkus.container-image.group=${{ github.actor }} \
-                                            -Dquarkus.container-image.tag= ${{ github.run_id }} \
+                                            -Dquarkus.container-image.tag=${{ github.run_id }} \
                                             -Dquarkus.container-image.additional-tags=${{ env.GIT_BRANCH_NAME }} \
                                             -Dquarkus.container-image.name=QuarkusUrlShortenderDemo
           
