@@ -1,0 +1,30 @@
+name: Java CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git branch name
+        id: git-branch-name
+        uses: EthanSK/git-branch-name-action@v1
+            
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Build with Maven
+        run: |
+          mvn package --batch-mode          -Dquarkus.native.container-build=false \
+                                            -Dquarkus.container-image.build=true \
+                                            -Dquarkus.container-image.push=true \
+                                            -Dquarkus.container-image.username=${{ github.actor }} \
+                                            -Dquarkus.container-image.password=${{ secrets.GITHUB_TOKEN }} \
+                                            -Dquarkus.container-image.registry=ghcr.io \
+                                            -Dquarkus.container-image.group=${{ github.actor }} \
+                                            -Dquarkus.container-image.tag=${{ env.GIT_BRANCH_NAME }} \
+                                            -Dquarkus.container-image.additional-tags=${{ github.run_number }}
+          

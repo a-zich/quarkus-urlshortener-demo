@@ -1,54 +1,53 @@
 # quarkus-urlshortener-demo project
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+This project is part of a Code Challenge. I used it to try out:
+- Quarkus framework
+- with Lombok
+- creating REST resources
+- parameter validators
+- and low level Route handlers
+- OpenAPI auto generation
+- Github Actions
+- build a docker image
+- upload the image to Github Container Registry
+
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+
+## What can it do
+
+The app will allow you to have 6-alphanumberic identifiers for short URLs.
+
+When you call /:id it will send an HTTP redirect response (either 307 or 308) back to the configured URL. Or a 404 if the id was not found.
+You can create new forwards by posting to /urls . You can get the current configuration by getting /urls/:id . And you can delete a forwarding by a delete request to /urls/:id .
+
+As an additional feature it counts the calls per id for the last 24h (with a per minute granularity) which you can request by getting /stats/:id.
+
+Forwardings are persistet with an H2 database, but statistics are kept in memory only.
+
 
 ## Running the application in dev mode
 
 You can run your application in dev mode that enables live coding using:
+
 ```shell script
 ./mvnw compile quarkus:dev
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+> **_NOTE:_**  If you use an IDE it must be lombok-enabled, see Install at https://projectlombok.org/
 
-## Packaging and running the application
+> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/ .
 
-The application can be packaged using:
+> **_NOTE:_**  Swagger UI is included at http://localhost:8080/q/swagger-ui/ .
+
+## Running the docker image
+
+You can run the application directly from docker
+
 ```shell script
-./mvnw package
-```
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
-
-If you want to build an _über-jar_, execute the following command:
-```shell script
-./mvnw package -Dquarkus.package.type=uber-jar
+docker run -p 8080:8080 ghcr.io/a-zich/quarkus-urlshortener-demo:master
 ```
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+The project uses an embedded H2 database for persistence. You can mount the /work/db directory to keep data persistent.
 
-## Creating a native executable
-
-You can create a native executable using: 
-```shell script
-./mvnw package -Pnative
-```
-
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
-```shell script
-./mvnw package -Pnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/quarkus-urlshortener-demo-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.html.
-
-## Provided examples
-
-### RESTEasy JAX-RS example
-
-REST is easy peasy with this Hello World RESTEasy resource.
-
-[Related guide section...](https://quarkus.io/guides/getting-started#the-jax-rs-resources)
+> **_NOTE:_**  Swagger UI is included at http://localhost:8080/q/swagger-ui/ .
