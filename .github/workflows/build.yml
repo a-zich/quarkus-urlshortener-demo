@@ -23,5 +23,5 @@ jobs:
                                             -Dquarkus.jib.base-registry-username=${{ github.actor }} \
                                             -Dquarkus.jib.base-registry-password=${{ secrets.GITHUB_TOKEN }} \
                                             -Dquarkus.container-image.registry=ghcr.io \
-                                            -Dquarkus.container-image.group={{ github.repository_owner }}
+                                            -Dquarkus.container-image.group={{ github.actor }}
           
