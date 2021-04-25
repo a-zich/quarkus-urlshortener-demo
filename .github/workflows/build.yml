@@ -26,6 +26,5 @@ jobs:
                                             -Dquarkus.container-image.registry=ghcr.io \
                                             -Dquarkus.container-image.group=${{ github.actor }} \
                                             -Dquarkus.container-image.tag=${{ github.run_id }} \
-                                            -Dquarkus.container-image.additional-tags=${{ env.GIT_BRANCH_NAME }} \
-                                            -Dquarkus.container-image.name=QuarkusUrlShortenderDemo
+                                            -Dquarkus.container-image.additional-tags=${{ env.GIT_BRANCH_NAME }}
           
