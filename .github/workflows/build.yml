@@ -16,9 +16,7 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Build with Maven
-        run: mvn package --batch-mode -Pnative -Dquarkus.native.container-build=true
-      - name: Build the tagged Docker image
-        run: docker build . --file Dockerfile.native        
+        run: mvn package --batch-mode -Pnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true
       - name: Push to GitHub Packages
         uses: docker/build-push-action@v1
         with:
