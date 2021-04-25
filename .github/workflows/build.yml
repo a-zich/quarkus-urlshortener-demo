@@ -14,7 +14,7 @@ jobs:
           distribution: 'adopt'
       - name: Build with Maven
         run: |
-          mvn package --batch-mode -Dquarkus.native.container-build=false \
+          mvn package --batch-mode -Pnative -Dquarkus.native.container-build=false \
                                             -Dquarkus.container-image.build=true \
                                             -Dquarkus.container-image.push=true \
                                             -Dquarkus.container-image.username=${{ github.actor }} \
